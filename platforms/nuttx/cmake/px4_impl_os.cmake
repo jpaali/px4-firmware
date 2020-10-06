@@ -167,7 +167,13 @@ function(px4_os_prebuild_targets)
 	endif()
 
 	add_library(prebuild_targets INTERFACE)
-	target_link_libraries(prebuild_targets INTERFACE nuttx_xx nuttx_c nuttx_fs nuttx_mm nuttx_sched m gcc)
+
+	if ("${CONFIG_BUILD_FLAT}" STREQUAL "1")
+		target_link_libraries(prebuild_targets INTERFACE nuttx_xx nuttx_c nuttx_fs nuttx_mm nuttx_sched m gcc)
+	else()
+		target_link_libraries(prebuild_targets INTERFACE nuttx_xx m gcc)
+	endif()
+
 	add_dependencies(prebuild_targets DEPENDS nuttx_build uorb_headers)
 
 endfunction()
