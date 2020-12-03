@@ -63,7 +63,7 @@
 #include <uORB/topics/actuator_controls.h>
 #include <uORB/topics/airspeed.h>
 #include <uORB/topics/battery_status.h>
-#include <uORB/topics/cpuload.h>
+#include <uORB/topics/vehicle_cpuload.h>
 #include <uORB/topics/distance_sensor.h>
 #include <uORB/topics/esc_status.h>
 #include <uORB/topics/estimator_selector_status.h>
@@ -391,7 +391,7 @@ private:
 
 	main_state_t	_main_state_pre_offboard{commander_state_s::MAIN_STATE_MANUAL};
 
-	cpuload_s		_cpuload{};
+	vehicle_cpuload_s		_cpuload{};
 	geofence_result_s	_geofence_result{};
 	vehicle_land_detected_s	_land_detector{};
 	safety_s		_safety{};
@@ -409,7 +409,7 @@ private:
 	// Subscriptions
 	uORB::Subscription					_actuator_controls_sub{ORB_ID_VEHICLE_ATTITUDE_CONTROLS};
 	uORB::Subscription					_cmd_sub {ORB_ID(vehicle_command)};
-	uORB::Subscription					_cpuload_sub{ORB_ID(cpuload)};
+	uORB::Subscription					_cpuload_sub{ORB_ID(vehicle_cpuload)};
 	uORB::Subscription					_esc_status_sub{ORB_ID(esc_status)};
 	uORB::Subscription                                      _estimator_selector_status_sub{ORB_ID(estimator_selector_status)};
 	uORB::Subscription					_geofence_result_sub{ORB_ID(geofence_result)};
