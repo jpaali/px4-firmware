@@ -95,7 +95,7 @@ public:
 	int get_instance() const
 	{
 		if (_handle) {
-			return static_cast<uORB::DeviceNode *>(_handle)->get_instance();
+			return Manager::orb_get_instance(_handle);
 		}
 
 		return -1;
