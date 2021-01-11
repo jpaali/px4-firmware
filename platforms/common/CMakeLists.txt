@@ -54,8 +54,7 @@ add_library(px4_platform
 add_dependencies(px4_platform prebuild_targets)
 
 if (NOT "${PX4_BOARD}" MATCHES "io-v2")
-	add_subdirectory(uORB)
-	target_link_libraries(px4_platform PRIVATE uORB)
+       add_subdirectory(uORB)
 endif()
 
 add_subdirectory(px4_work_queue)
