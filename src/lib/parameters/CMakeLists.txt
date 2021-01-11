@@ -150,7 +150,8 @@ if (NOT "${PX4_BOARD}" MATCHES "px4_io")
 		px4_parameters.hpp
 	)
 
-	target_link_libraries(parameters PRIVATE perf tinybson px4_layer)
+	target_link_libraries(parameters PRIVATE perf tinybson)
+
 	target_compile_definitions(parameters PRIVATE -DMODULE_NAME="parameters")
 	target_compile_options(parameters
 		PRIVATE
@@ -160,10 +161,13 @@ if (NOT "${PX4_BOARD}" MATCHES "px4_io")
 else()
 	add_library(parameters ${PX4_SOURCE_DIR}/platforms/common/empty.c)
 endif()
-add_dependencies(parameters prebuild_targets)
+target_link_libraries(parameters PRIVATE prebuild_targets)
 
 if(${PX4_PLATFORM} STREQUAL "nuttx")
-	target_link_libraries(parameters PRIVATE flashparams tinybson)
+	if ("${CONFIG_BUILD_FLAT}" STREQUAL "1")
+		# TODO: make flashparams work in non-flat build
+		target_link_libraries(parameters PRIVATE flashparams tinybson)
+	endif()
 endif()
 
 px4_add_functional_gtest(SRC ParameterTest.cpp LINKLIBS parameters)
