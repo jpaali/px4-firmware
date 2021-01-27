@@ -74,6 +74,12 @@
 #include <px4_platform/board_determine_hw_info.h>
 #include <px4_platform/board_dma_alloc.h>
 
+#if defined arm_netinitialize
+#undef arm_netinitialize
+#endif
+
+void arm_netinitialize(void);
+
 /****************************************************************************
  * Pre-Processor Definitions
  ****************************************************************************/
@@ -231,6 +237,11 @@ __EXPORT int board_app_initialize(uintptr_t arg)
 	/* configure SPI interfaces (after we determined the HW version) */
 
 	stm32_spiinitialize();
+
+	/* We should configure networking now, if CONFIG_NETDEV_LATEINIT is defined */
+#if defined(CONFIG_NET) && defined(CONFIG_NETDEV_LATEINIT)
+	arm_netinitialize();
+#endif
 
 	/* Does this board have CAN 2 or CAN 3 if not decouple the RX
 	 * from IP block Leave TX connected
