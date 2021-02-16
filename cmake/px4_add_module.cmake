@@ -100,7 +100,7 @@ function(px4_add_module)
 		if(INCLUDES)
 			target_include_directories(${MODULE}_original PRIVATE ${INCLUDES})
 		endif()
-		target_compile_definitions(${MODULE}_original PRIVATE PX4_MAIN=${MAIN}_app_main)
+		target_compile_definitions(${MODULE}_original PRIVATE PX4_MAIN=${MAIN}_main)
 		target_compile_definitions(${MODULE}_original PRIVATE MODULE_NAME="${MAIN}_original")
 
 		# unity build
@@ -184,7 +184,7 @@ function(px4_add_module)
 
 	# MAIN
 	if(MAIN)
-		target_compile_definitions(${MODULE} PRIVATE PX4_MAIN=${MAIN}_app_main)
+		target_compile_definitions(${MODULE} PRIVATE PX4_MAIN=${MAIN}_main)
 		target_compile_definitions(${MODULE} PRIVATE MODULE_NAME="${MAIN}")
 	else()
 		message(FATAL_ERROR "MAIN required")

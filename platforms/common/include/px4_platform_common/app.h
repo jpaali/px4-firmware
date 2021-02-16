@@ -68,5 +68,10 @@ private:
 // Task/process based build
 
 #ifdef PX4_MAIN
-extern int PX4_MAIN(int argc, char *argv[]);
+#ifdef __cplusplus
+extern "C"
+#else
+extern
+#endif
+int PX4_MAIN(int argc, char *argv[]);
 #endif
