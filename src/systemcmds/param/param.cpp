@@ -184,8 +184,8 @@ $ reboot
 	PRINT_MODULE_USAGE_ARG("<param>", "param name", false);
 }
 
-int
-param_main(int argc, char *argv[])
+extern "C" int
+PX4_MAIN(int argc, char *argv[])
 {
 	if (argc >= 2) {
 		if (!strcmp(argv[1], "save")) {
