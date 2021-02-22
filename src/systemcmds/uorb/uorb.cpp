@@ -38,11 +38,11 @@
 #include <px4_platform_common/log.h>
 #include <px4_platform_common/module.h>
 
-extern "C" { __EXPORT int uorb_main(int argc, char *argv[]); }
+extern "C" { __EXPORT int PX4_MAIN(int argc, char *argv[]); }
 
 static void usage();
 
-int uorb_main(int argc, char *argv[])
+int PX4_MAIN(int argc, char *argv[])
 {
 	if (argc < 2) {
 		usage();

@@ -38,3 +38,15 @@ px4_add_module(
 		uorb.cpp
 	DEPENDS
 	)
+
+if (NOT CONFIG_BUILD_FLAT)
+px4_add_module(
+	MODULE systemcmds__kuorb
+	MAIN kuorb
+	COMPILE_FLAGS
+	SRCS
+		uorb.cpp
+	DEPENDS
+	KERNEL
+	)
+endif()
